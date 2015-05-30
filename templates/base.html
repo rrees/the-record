@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+	<title>{% block title %}{% endblock %}</title>
+	
+	{% block head %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel='stylesheet' href="/static/css/">
+	{% endblock %}
+
+	{% include 'bootstrap.html' %}
+	</head>
+
+	<body>
+	{% block body %}
+	{% endblock %}
+	</body>
+</html>
