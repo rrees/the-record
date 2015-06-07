@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container-fluid">
-<h1>The Dossier</h1>
+<heading><h1>The Dossier</h1></heading>
 </div>
 
 <div class="container-fluid">
@@ -12,17 +12,20 @@
 <form method="POST" action="/dossier">
 	<div class="form-group">
 	<label for="dossier-name">Name</label>
-	<input type="text" class="form-control" id="dossier-name" placeholder="Name the dossier">
+	<input type="text" class="form-control" id="dossier-name" placeholder="Name the dossier" name="name">
 	</div>
 </form>
 
 {% if dossiers %}
+<section>
+<heading><h1>Dossiers</h1></heading>
 <ul>
 {% for dossier in dossiers %}
 <li>{{dossier.name}}</li>
 {% endfor %}
 </ul>
 {% endif %}
+</section>
 </div>
 
 {% endblock %}
