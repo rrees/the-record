@@ -25,6 +25,17 @@ class MainPage(webapp2.RequestHandler):
 		self.response.write(template.render(template_values))
 
 class Dossier(webapp2.RequestHandler):
+    def get(self, dossier_id):
+        user = users.get_current_user()
+
+        dossier = filecabinet.read(user, dossier_id)
+
+        template_values = {
+            "dossier": dossier
+        }
+
+        template = JINJA.get_template('dossier.html')
+        self.response.write(template.render(template_values))
 	def post(self):
 		user = users.get_current_user()
 		form = forms.Dossier(self.request.POST)
@@ -35,5 +46,6 @@ class Dossier(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
-	webapp2.Route(r'/dossier', handler=Dossier)
+	webapp2.Route(r'/dossier', handler=Dossier),
+    webapp2.Route(r'/dossier/<dossier_id:.+>', handler=Dossier)
 	], debug=True)

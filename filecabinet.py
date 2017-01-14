@@ -19,3 +19,6 @@ def create_dossier(user, name):
 
 def list_dossiers_for(user):
 	return [d for d in Dossier.query().filter(Dossier.user == user)]
+
+def read(user, dossier_id):
+	return ndb.Key(urlsafe=dossier_id).get()

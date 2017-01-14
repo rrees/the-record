@@ -21,7 +21,7 @@
 <heading><h1>Dossiers</h1></heading>
 <ul>
 {% for dossier in dossiers %}
-<li>{{dossier.name}}</li>
+<li><a href="/dossier/{{dossier.key.urlsafe()}}">{{dossier.name}}</a></li>
 {% endfor %}
 </ul>
 {% endif %}
