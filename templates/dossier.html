@@ -8,6 +8,12 @@
   <h1>{{dossier.name}}</h1>
 
   {% if dossier.facts %}
+  <dl>
+    {% for fact in dossier.facts %}
+    <dt>{{fact.statement}}</dt>
+    <dd>{{fact.fact}}</dt>
+    {% endfor %}
+  </dl>
   {% endif %}
 
   <form method="POST" action="/dossier/{{dossier.key.urlsafe()}}/form/new-fact">
