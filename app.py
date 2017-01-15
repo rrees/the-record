@@ -44,8 +44,13 @@ class Dossier(webapp2.RequestHandler):
 			filecabinet.create_dossier(user, form.name.data)
 		return webapp2.redirect('/')
 
+class FactForm(webapp2.RequestHandler):
+    def post(self, dossier_id):
+        return webapp2.redirect('/')
+
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
 	webapp2.Route(r'/dossier', handler=Dossier),
-    webapp2.Route(r'/dossier/<dossier_id:.+>', handler=Dossier)
+    webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>', handler=Dossier),
+    webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>/form/new-fact', handler=FactForm)
 	], debug=True)

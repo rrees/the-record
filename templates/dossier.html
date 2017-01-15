@@ -6,5 +6,24 @@
 <div class="container-fluid">
 
   <h1>{{dossier.name}}</h1>
+
+  {% if dossier.facts %}
+  {% endif %}
+
+  <form method="POST" action="/dossier/{{dossier.key.urlsafe()}}/form/new-fact">
+    <div class="form-group">
+      <label for="statement">Statement</label>
+      <input id="statement" name="statement" type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <label for="fact">Fact</label>
+      <input id="fact" name="fact" type="text" class="form-control" required>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn">Add fact</button>
+    </div>
+  </form>
 </div>
 {% endblock %}
