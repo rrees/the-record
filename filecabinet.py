@@ -26,3 +26,10 @@ def list_dossiers_for(user):
 
 def read(user, dossier_id):
 	return ndb.Key(urlsafe=dossier_id).get()
+
+def add_fact(user, dossier_id, fact_data):
+	dossier = read(user, dossier_id)
+
+	dossier.facts.append(Information(statement=fact_data['statement'], fact=fact_data['fact']))
+	dossier.put()
+	return dossier

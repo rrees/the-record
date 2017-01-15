@@ -46,7 +46,15 @@ class Dossier(webapp2.RequestHandler):
 
 class FactForm(webapp2.RequestHandler):
     def post(self, dossier_id):
-        return webapp2.redirect('/')
+        user = users.get_current_user()
+
+        form = forms.Fact(self.request.POST)
+
+        if form.validate():
+            logging.info(form.data)
+            filecabinet.add_fact(user, dossier_id, form.data)
+
+        return webapp2.redirect('/dossier/{0}'.format(dossier_id))
 
 app = webapp2.WSGIApplication([
 	webapp2.Route(r'/', handler=MainPage),
