@@ -8,14 +8,20 @@ class Information(ndb.Model):
 
 class Dossier(ndb.Model):
 	name = ndb.StringProperty(required=True)
+	description = ndb.TextProperty()
 	user = ndb.UserProperty(required=True)
 	facts = ndb.StructuredProperty(Information, repeated=True)
+	tags = ndb.StringProperty(repeated=True)
 
-def create_dossier(user, name):
+def create_dossier(user, data):
 	current_dossier = Dossier.query().filter(Dossier.name == name, Dossier.user == user).get()
 
 	if not current_dossier:
-		dossier = Dossier(name=name, user=user, information={})
+		dossier = Dossier(name=data.name, user=user, information={})
+
+		if data.description:
+			dossier.description = data. description
+
 		dossier.put()
 		return dossier
 

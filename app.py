@@ -15,14 +15,14 @@ JINJA = jinja2.Environment(
     autoescape=True)
 
 class MainPage(webapp2.RequestHandler):
-	def get(self):
-		user = users.get_current_user()
-		template_values = {
-			'dossiers': filecabinet.list_dossiers_for(user)
-		}
+    def get(self):
+        user = users.get_current_user()
+        template_values = {
+            'dossiers': filecabinet.list_dossiers_for(user)
+        }
 
-		template = JINJA.get_template('index.html')
-		self.response.write(template.render(template_values))
+        template = JINJA.get_template('index.html')
+        self.response.write(template.render(template_values))
 
 class Dossier(webapp2.RequestHandler):
     def get(self, dossier_id):
@@ -36,13 +36,19 @@ class Dossier(webapp2.RequestHandler):
 
         template = JINJA.get_template('dossier.html')
         self.response.write(template.render(template_values))
-	def post(self):
-		user = users.get_current_user()
-		form = forms.Dossier(self.request.POST)
 
-		if form.validate():
-			filecabinet.create_dossier(user, form.name.data)
-		return webapp2.redirect('/')
+    def post(self):
+        user = users.get_current_user()
+        form = forms.Dossier(self.request.POST)
+
+        if form.validate():
+            form_data = {
+                "name": form.data.name,
+                "description": form.data.description if form.data.description else None
+            }
+
+            filecabinet.create_dossier(user, form_data)
+        return webapp2.redirect('/')
 
 class FactForm(webapp2.RequestHandler):
     def post(self, dossier_id):
@@ -57,8 +63,8 @@ class FactForm(webapp2.RequestHandler):
         return webapp2.redirect('/dossier/{0}'.format(dossier_id))
 
 app = webapp2.WSGIApplication([
-	webapp2.Route(r'/', handler=MainPage),
-	webapp2.Route(r'/dossier', handler=Dossier),
+    webapp2.Route(r'/', handler=MainPage),
+    webapp2.Route(r'/dossier', handler=Dossier),
     webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>', handler=Dossier),
     webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>/form/new-fact', handler=FactForm)
-	], debug=True)
+    ], debug=True)
