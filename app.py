@@ -8,6 +8,8 @@ from google.appengine.api import users
 
 import filecabinet
 import forms
+import models
+import tags
 
 JINJA = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
@@ -42,10 +44,12 @@ class Dossier(webapp2.RequestHandler):
         form = forms.Dossier(self.request.POST)
 
         if form.validate():
-            form_data = {
-                "name": form.data.name,
-                "description": form.data.description if form.data.description else None
-            }
+            logging.info(form.data)
+            form_data = models.DossierFormData(
+                form.data['name'],
+                form.data.get('description', None),
+                tags.extract_tags(form.data.get('tags', ""))    
+            )
 
             filecabinet.create_dossier(user, form_data)
         return webapp2.redirect('/')

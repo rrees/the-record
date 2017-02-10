@@ -2,6 +2,8 @@ import logging
 
 from google.appengine.ext import ndb
 
+import models
+
 class Information(ndb.Model):
 	statement = ndb.StringProperty(required=True)
 	fact = ndb.StringProperty(required=True)
@@ -14,13 +16,16 @@ class Dossier(ndb.Model):
 	tags = ndb.StringProperty(repeated=True)
 
 def create_dossier(user, data):
-	current_dossier = Dossier.query().filter(Dossier.name == name, Dossier.user == user).get()
+	current_dossier = Dossier.query().filter(Dossier.name == data.name, Dossier.user == user).get()
 
 	if not current_dossier:
-		dossier = Dossier(name=data.name, user=user, information={})
+		dossier = Dossier(name=data.name, user=user)
 
 		if data.description:
 			dossier.description = data. description
+
+		if data.tags:
+			dossier.tags = data.tags
 
 		dossier.put()
 		return dossier

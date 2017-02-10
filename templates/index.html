@@ -14,6 +14,20 @@
 	<label for="dossier-name">Name</label>
 	<input type="text" class="form-control" id="dossier-name" placeholder="Name the dossier" name="name">
 	</div>
+
+	<div class="form-group">
+		<label for="dossier-description">Description</label>
+		<input type="text" class="form-control" id="dossier-description" placeholder="Description of what the dossier is about" name="description">
+	</div>
+
+	<div class="form-group">
+		<label for="dossier-tags">Tags</label>
+		<input type="text" class="form-control" id="dossier-tags" placeholder="Comma-separated tags" name="tags">
+	</div>
+
+	<div class="form-group">
+		<button class="btn">Save</button>
+	</div>
 </form>
 
 {% if dossiers %}

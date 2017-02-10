@@ -7,6 +7,18 @@
 
   <h1>{{dossier.name}}</h1>
 
+  {% if dossier.description %}
+  <p>{{dossier.description}}</p>
+  {% endif %}
+
+  {% if dossier.tags %}
+  <ul>
+    {% for tag in dossier.tags %}
+    <li>|{{tag}}|</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
   {% if dossier.facts %}
   <dl>
     {% for fact in dossier.facts %}
