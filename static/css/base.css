@@ -1,0 +1,10 @@
+
+.taglist {
+	list-style: none;
+	display: flex;
+	padding-left: 0;
+}
+
+.taglist--tag {
+	margin: 0 1em;
+}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Dossier on {{dossier.name}}{% endblock %}
 
 {% block body %}
 <div class="container-fluid">
@@ -12,9 +12,9 @@
   {% endif %}
 
   {% if dossier.tags %}
-  <ul>
+  <ul class="taglist">
     {% for tag in dossier.tags %}
-    <li>|{{tag}}|</li>
+    <li class="taglist--tag">{{tag}}</li>
     {% endfor %}
   </ul>
   {% endif %}
