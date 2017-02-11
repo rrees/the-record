@@ -14,7 +14,7 @@
   {% if dossier.tags %}
   <ul class="taglist">
     {% for tag in dossier.tags %}
-    <li class="taglist--tag">{{tag}}</li>
+    <li class="taglist--tag"><a href="/dossiers/tag/{{tag}}">{{tag}}</a></li>
     {% endfor %}
   </ul>
   {% endif %}

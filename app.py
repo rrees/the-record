@@ -10,6 +10,7 @@ import filecabinet
 import forms
 import models
 import tags
+import handlers
 
 JINJA = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
@@ -70,5 +71,6 @@ app = webapp2.WSGIApplication([
     webapp2.Route(r'/', handler=MainPage),
     webapp2.Route(r'/dossier', handler=Dossier),
     webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>', handler=Dossier),
-    webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>/form/new-fact', handler=FactForm)
+    webapp2.Route(r'/dossier/<dossier_id:[a-zA-Z0-9-_]+>/form/new-fact', handler=FactForm),
+    webapp2.Route(r'/dossiers/tag/<tag_name:.+>', handler=handlers.TagList),
     ], debug=True)
