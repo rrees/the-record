@@ -8,3 +8,21 @@
 .taglist--tag {
 	margin: 0 1em;
 }
+
+.dossier-display-panel {
+	display: flex;
+	flex-flow: column;
+}
+
+@media (min-width: 40rem) {
+	.dossier-display-panel {
+		flex-flow: row;
+		justify-content: space-between;
+	}
+
+	.dossier-display-panel > * {
+		width: 50vw;
+		padding: 0 2rem;
+	}
+}
+

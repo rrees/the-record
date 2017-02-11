@@ -9,18 +9,28 @@
 
 <div class="container-fluid">
 
-{% include 'fragments/forms/dossier.html' %}
+	<div class="dossier-display-panel">
 
-{% if dossiers %}
-<section>
-<heading><h1>Dossiers</h1></heading>
-<ul>
-{% for dossier in dossiers %}
-<li><a href="/dossier/{{dossier.key.urlsafe()}}">{{dossier.name}}</a></li>
-{% endfor %}
-</ul>
-{% endif %}
-</section>
+		<div class="create-dossier-form">
+			<h2>Create dossier</h2>
+
+			{% include 'fragments/forms/dossier.html' %}
+		</div>
+
+		<div class="dossier-list-panel">
+			{% if dossiers %}
+			<section>
+			<heading><h2>Dossiers</h2></heading>
+			<ul>
+			{% for dossier in dossiers %}
+			<li><a href="/dossier/{{dossier.key.urlsafe()}}">{{dossier.name}}</a></li>
+			{% endfor %}
+			</ul>
+			</section>
+			{% endif %}
+		</div>
+
+	</div>
 </div>
 
 {% endblock %}
