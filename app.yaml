@@ -10,12 +10,16 @@ handlers:
 
 - url: /api/.*
   script: api.app
+  login: required
+  secure: always
 
 - url: /jobs/.*
   script: jobs.app
+  secure: always
 
 - url: /tasks/.*
   script: tasks.app
+  secure: always
 
 - url: /.*
   script: app.app
